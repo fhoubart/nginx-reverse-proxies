@@ -14,4 +14,4 @@ Les certificats sont générés à la construction du container par le script [g
 
 ## Construction du Container Docker
 
-Avant de pouvoir générer les certificats, il faut installer `openssl` via `apt-get`, ce que l'on retrouve dans le Dockerfile.
+Avant de pouvoir générer les certificats, il faut installer `openssl` via `apt-get`, ce que l'on retrouve dans le [Dockerfile](Dockerfile).
