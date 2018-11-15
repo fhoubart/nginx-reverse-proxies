@@ -1,3 +1,25 @@
+# Utilisation de ce repository
+
+Ce repository contient des exemples de configuration Nginx pour la mise en oeuvre de Reverse Proxy, packagés sous Docker.
+
+Comme les serveurs communiquent entre eux, ils doivent être exécutés sur le même réseau docker, ou plus simplement dans la même stack. Le fichier `docker-compose.yml` à la racine sert à cela. Pour lancer l'ensemble des images, lancer :
+
+```
+docker-compose up --build
+```
+
+Voici à quoi correspondent chacun des proxies :
+
+- [http://localhost:8080](http://localhost:8080) : un serveur basique qui renvoie du contenu static, appelé le _serveur 1_
+- [http://localhost:8081](http://localhost:8081) : un autre serveur qui renvoie du contenu static, appelé le _serveur 1_
+- [https://localhost:8000](https://localhost:8000) (Reverse Proxy 1) : un Reverse Proxy qui se positionne en amont du _serveur 1_ en ajoutant une couche HTTPS
+- [https://server1:8001](https://server1:8001) et [https://server2:8001](https://server2:8001) (Reverse Proxy 2, sous réserve d'avoir ajouté _server1_ et _server2_ dans le fichier host pour pointer vers localhost) : un Reverse Proxy qui se positionne en amont dEs deux serveurs et route en fonction du nom de domaine. On simule la mise en place de plusieurs services sur la même IP et le même port
+- [https://localhost:8002](https://localhost:8002), [https://localhost:8002/s1](https://localhost:8002/s1) et [https://localhost:8002/s2](https://localhost:8002/s2) (Reverse Proxy 3) : un Reverse Proxy qui route vers différents serveurs en fonction du chemin de l'url
+- [https://localhost:8003](https://localhost:8003) (Reverse Proxy 4) : un Load Balancer qui répartie la charge entre les serveurs 1 et 2
+
+
+# Sujet
+
 ## Construction de deux serveurs basiques
 Mettre en place deux serveurs Web qui écoutent respectivement sur les ports 8080 et 8081. Ils contiendront un fichier `index.html` :
 
