@@ -1,0 +1,32 @@
+version: '3.1'
+services:
+
+  server1:
+    build: server1
+    ports:
+      - 8080:8080
+
+  server2:
+    build: server2
+    ports:
+      - 8081:8081
+
+  rp1:
+    build: rp1
+    ports:
+      - 8000:8000
+
+  rp2:
+    build: rp2
+    ports:
+      - 8001:8001
+
+  rp3:
+    build: rp3
+    ports:
+      - 8002:8002
+
+  rp4:
+    build: rp4
+    ports:
+      - 8003:8003
