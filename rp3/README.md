@@ -12,11 +12,11 @@ Cela est réalisé par les directive `rewrite`. Elles sont exécutées simultane
 
 ```
 location /s2 {
-    rewrite /s2 / break;
-    rewrite /s2/(.*) $1 break;
+    rewrite ^/s2$ / break;
+    rewrite ^/s2/(.*)$ /$1 break;
     proxy_pass http://server2:8080/;
 }
 ```
 
-La première directive remplace simplement le chemin exact `/s2` par `/`. La seconde remplace tout chemin qui commence par `/s2/` par ce qui est entre parenthèse, donc tout ce qui suit. Les variables spéciales `$1`, `$2`, etc font référence aux premier, deuxième, ... blocs entre parenthèse dans le chemin initial.
+La première directive remplace simplement le chemin exact `/s2` par `/`.  Les `^` (début de ligne) et `$` (fin de ligne) au début et à fin indique qu'il faut matcher exactement ce motif. Sans cela, n'importe quelle url qui contient `/s2` sera remplacée par `/`. La seconde remplace tout chemin qui commence par `/s2/` (notez le `^` qui indique le début de ligne) par ce qui est entre parenthèses, donc tout ce qui suit. Les variables spéciales `$1`, `$2`, etc font référence aux premier, deuxième, ... blocs entre parenthèses dans le chemin initial.
 
